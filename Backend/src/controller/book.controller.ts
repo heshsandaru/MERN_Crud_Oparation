@@ -22,3 +22,16 @@ export const getBooks = async(req: Request, res: Response,next: NextFunction) =>
         next(err);
     }
 }
+
+//update a book by Id
+export const updateBookById = async(req: Request, res: Response,next: NextFunction) => {
+    try{
+        const book = await BookModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        if(!book){
+            return res.status(404).json({message: "Book not found"});
+        }
+        res.status(200).json(book);
+    }catch(err: any){
+        next(err);
+    }
+}
