@@ -35,3 +35,30 @@ export const updateBookById = async(req: Request, res: Response,next: NextFuncti
         next(err);
     }
 }
+
+//delete a book by Id
+export const deleteBookById = async(req: Request, res: Response,next: NextFunction) => {
+    try{
+        const book = await BookModel.findByIdAndDelete(req.params.id);
+        if(!book){
+            return res.status(404).json({message: "Book not found"});
+        }
+        res.status(200).json({message: "Book deleted successfully"});
+
+    }catch(err: any){
+        next(err);
+    }
+}
+
+//get a book by Id (optional)
+export const getBookById = async(req: Request, res: Response,next: NextFunction) => {
+    try{
+        const book = await BookModel.findById(req.params.id);
+        if(!book){
+            return res.status(404).json({message: "Book not found"});
+        }
+        res.status(200).json(book);
+    }catch(err: any){
+        next(err);
+    }
+}
