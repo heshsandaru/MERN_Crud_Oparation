@@ -12,3 +12,13 @@ export const createbook = async(req: Request, res: Response,next: NextFunction) 
         next(err);
     }
 }
+
+//Get all books
+export const getBooks = async(req: Request, res: Response,next: NextFunction) => {
+    try{
+        const books = await BookModel.find();
+        res.status(200).json(books);
+    }catch(err: any){
+        next(err);
+    }
+}

@@ -1,6 +1,11 @@
 import { Router } from "express";
-import { createbook } from "../controller/book.controller";
+import { createbook, getBooks } from "../controller/book.controller";
+import { get } from "node:http";
 
-const route = Router();
+const router = Router();
 
-route.post("/",createbook)
+router.post("/",createbook);
+router.get("/",getBooks);
+
+
+export default router;
